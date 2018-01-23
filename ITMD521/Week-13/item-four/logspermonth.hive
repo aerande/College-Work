@@ -1,0 +1,1 @@
+select p.mon,p.yea,max(p.url),max(p.count) as max from ((select month(date1) as mon, year(date1) as yea, count(cs_uri_stem) as count,cs_uri_stem as url from smalllog where sc_status=200 and cs_uri_stem NOT LIKE '%index%' GROUP BY date1,cs_uri_stem order by mon, yea) p) group by p.mon,p.yea order by p.yea,p.mon;
